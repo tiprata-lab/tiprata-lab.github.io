@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfólio | Tiago Prata</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.plot.ly/plotly-2.24.1.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            background-color: #050505;
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 40px 20px 100px 20px; /* Espaço inferior para não cobrir a barra de contatos */
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            margin: 0 0 10px 0;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-auto-rows: minmax(180px, auto);
+            grid-gap: 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: linear-gradient(145deg, #121212, #1a1a1a);
+            border: 1px solid #222;
+            border-radius: 24px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+        }
+
+        .card:hover {
+            border-color: #00ff88;
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .hero-block {
+            grid-column: span 2;
+            grid-row: span 2;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .chart-wide-block {
+            grid-column: span 2;
+            position: relative;
+            padding: 0; 
+        }
+
+        .skills-block {
+            grid-row: span 2;
+        }
+
+        /* Bloco de Entregas em Largura Total */
+        .solutions-block {
+            grid-column: span 3;
+            display: grid;
+            grid-template-columns: 1.2fr 1.8fr;
+            gap: 30px;
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 30px;
+            border: 2px solid #222;
+            object-fit: cover;
+            background: #222;
+        }
+
+        .hero-text h1 { font-size: 2.5rem; }
+        .hero-text p { color: #888; font-size: 1.1rem; line-height: 1.6; }
+        
+        .tag {
+            background: #222;
+            color: #00ff88;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            align-self: flex-start;
+        }
+
+        .chart-container {
+            width: 100%;
+            height: 100%;
+            min-height: 250px;
+        }
+
+        /* --- LISTA DE PRODUTOS --- */
+        .product-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .product-item {
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+        }
+
+        .product-icon {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            color: #00ff88;
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 1.1rem;
+        }
+
+        .product-info h4 {
+            font-size: 1.05rem;
+            margin: 0 0 4px 0;
+            color: #fff;
+        }
+
+        .product-info p {
+            margin: 0;
+            font-size: 0.88rem;
+            color: #888;
+            line-height: 1.4;
+        }
+
+        /* --- CARROSSEL DE PRÊMIOS --- */
+        .carousel {
+            position: relative;
+            width: 100%;
+            height: 320px;
+            border-radius: 24px;
+        }
+
+        .carousel-inner {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .carousel-item {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.6s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 30px;
+            box-sizing: border-box;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .carousel-item.active {
+            opacity: 1;
+            z-index: 1;
+        }
+
+        .carousel-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(5,5,5,0.95) 20%, rgba(5,5,5,0.4) 60%, transparent 100%);
+            z-index: 0;
+        }
+
+        .carousel-content {
+            position: relative;
+            z-index: 2;
+            max-width: 80%;
+        }
+
+        .carousel-content h3 { font-size: 1.6rem; margin-bottom: 5px; }
+        .carousel-content p { color: #bbb; margin: 0 0 15px 0; font-size: 0.95rem; }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 3;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .carousel-btn:hover { background: #00ff88; color: #000; border-color: #00ff88; }
+        .prev { left: 20px; }
+        .next { right: 20px; }
+
+        /* --- CARROSSEL DE ARTIGOS --- */
+        .article-item { display: none; opacity: 0; transition: opacity 0.4s ease-in-out; }
+        .article-item.active { display: block; opacity: 1; }
+        .article-nav-btn {
+            background: none; border: 1px solid #333; color: #666; border-radius: 50%;
+            width: 32px; height: 32px; cursor: pointer; display: flex; align-items: center;
+            justify-content: center; font-size: 0.75rem; transition: all 0.3s ease;
+        }
+        .article-nav-btn:hover { border-color: #00ff88; color: #00ff88; }
+
+        /* --- BARRA DE CONTATOS FIXA (FOOTER) --- */
+        .contact-footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(12px);
+            border-top: 1px solid #222;
+            padding: 20px 0;
+            z-index: 999;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        .contact-link {
+            color: #aaa;
+            text-decoration: none;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: color 0.3s ease;
+        }
+
+        .contact-link:hover {
+            color: #00ff88;
+        }
+
+        @media (max-width: 900px) {
+            .container { grid-template-columns: 1fr; }
+            .hero-block, .chart-wide-block, .skills-block, .solutions-block { grid-column: span 1; grid-row: span 1; flex-direction: column; align-items: flex-start; }
+            .solutions-block { grid-template-columns: 1fr; }
+            .profile-img { width: 100px; height: 100px; }
+            .carousel-content { max-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <div class="card hero-block">
+            <div style="display: flex; flex-direction: column; gap: 15px; flex-shrink: 0;">
+                <img src="foto.png" alt="Tiago Prata 1" class="profile-img">
+                <img src="foto2.jpg" alt="Tiago Prata 2" class="profile-img">
+            </div>
+            
+            <div class="hero-text">
+                <div style="display: flex; gap: 10px; margin-bottom: 5px; flex-wrap: wrap;">
+                    <span class="tag">Data Analyst & Strategist</span>
+                    <span class="tag" style="background: #1a1a1a; color: #888; border: 1px solid #333;">Fluência: inglês • francês • espanhol</span>
+                </div>
+                <h1>Tiago Prata (Agê)</h1>
+                <p>
+                    Há mais de <strong>10 anos</strong> traduzindo dados complexos em estratégias de mercado de alto impacto. Especialista em comportamento do consumidor, combino ciência de dados (SQL/Python/Pandas) e inteligência competitiva para transformar métricas brutas em narrativas de negócios.
+                </p>
+                <p style="font-size: 0.95rem; color: #00ff88; margin-top: 15px; font-family: 'Space Grotesk', sans-serif; opacity: 0.8;">
+                    ⚡ "Dê-me os dados e entregarei insights acionáveis."
+                </p>
+            </div>
+        </div>
+
+        <div class="card skills-block">
+            <div>
+                <h3>Competências/Skills</h3>
+                <p style="color: #666; font-size: 0.9rem; margin-bottom: 15px;">Visão holística das minhas macro-áreas de atuação.</p>
+                <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px;">
+                    <span style="background: #151515; color: #aaa; font-size: 0.75rem; padding: 4px 8px; border-radius: 6px; border: 1px solid #222;">SQL</span>
+                    <span style="background: #151515; color: #aaa; font-size: 0.75rem; padding: 4px 8px; border-radius: 6px; border: 1px solid #222;">Python</span>
+                    <span style="background: #151515; color: #aaa; font-size: 0.75rem; padding: 4px 8px; border-radius: 6px; border: 1px solid #222;">SPSS</span>
+                    <span style="background: #151515; color: #aaa; font-size: 0.75rem; padding: 4px 8px; border-radius: 6px; border: 1px solid #222;">CRM</span>
+                    <span style="background: #151515; color: #aaa; font-size: 0.75rem; padding: 4px 8px; border-radius: 6px; border: 1px solid #222;">Quali-Quanti</span>
+                    <span style="background: transparent; color: #444; font-size: 0.75rem; padding: 4px 8px; border-radius: 6px; border: 1px solid #222; opacity: 0.5;">Figma (Básico)</span>
+                    <span style="background: transparent; color: #444; font-size: 0.75rem; padding: 4px 8px; border-radius: 6px; border: 1px solid #222; opacity: 0.5;">Frontend (Leitura)</span>
+                </div>
+            </div>
+            <div class="chart-container">
+                <canvas id="skillsChart"></canvas>
+            </div>
+        </div>
+
+        <div class="card chart-wide-block">
+            <h3 style="padding: 30px 30px 0 30px; margin: 0; position: absolute; top: 0; left: 0; z-index: 4; font-size: 1.2rem; color: #666; text-transform: uppercase; letter-spacing: 1px;">Campanhas Premiadas</h3>
+            
+            <div class="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active" style="background-image: url('cannes.jpg'); background-color: #221c04;">
+                        <div class="carousel-overlay"></div>
+                        <div class="carousel-content">
+                            <span class="tag" style="color: #ffd700; background: rgba(255,215,0,0.1);">🏆 Leão de Ouro — Cannes</span>
+                            <h3 style="margin-top: 10px;">Campanha Coração Pede Socorro</h3>
+                            <p>Inteligência competitiva e comportamento aplicados a uma das campanhas mais premiadas do ano.</p>
+                            <a href="https://www.youtube.com/watch?v=DZ4zXWSatxk" target="_blank" style="color: #00ff88; text-decoration: none; font-size: 0.9rem;">Ver Campanha ➔</a>
+                        </div>
+                    </div>
+                    <div class="carousel-item" style="background-image: url('togowild.png'); background-color: #16031a;">
+                        <div class="carousel-overlay"></div>
+                        <div class="carousel-content">
+                            <span class="tag" style="color: #da70d6; background: rgba(218,112,214,0.1);">🚀 GUT Cannes 2023</span>
+                            <h3 style="margin-top: 10px;">To Go Wild</h3>
+                            <p>Modelagem e insights direcionados à performance estratégica em parceria com a GUT.</p>
+                            <a href="https://clubedecriacao.com.br/acervo/to-go-wild-gut-cannes-2023/" target="_blank" style="color: #00ff88; text-decoration: none; font-size: 0.9rem;">Ver no Clube de Criação ➔</a>
+                        </div>
+                    </div>
+                    <div class="carousel-item" style="background-image: url('spaten.png'); background-color: #03240d;">
+                        <div class="carousel-overlay"></div>
+                        <div class="carousel-content">
+                            <span class="tag" style="color: #00ff88; background: rgba(0,255,136,0.1);">🍺 Spaten</span>
+                            <h3 style="margin-top: 10px;">Multiverso da Força</h3>
+                            <p>Análise robusta de listening e inteligência de mercado para consolidação de marca.</p>
+                            <a href="https://clubedecriacao.com.br/ultimas/pre-estreia-2-220/" target="_blank" style="color: #00ff88; text-decoration: none; font-size: 0.9rem;">Ver Detalhes ➔</a>
+                        </div>
+                    </div>
+                    <div class="carousel-item" style="background-image: url('garoto.png'); background-color: #2b2402;">
+                        <div class="carousel-overlay"></div>
+                        <div class="carousel-content">
+                            <span class="tag" style="color: #ffcc00; background: rgba(255,204,0,0.1);">🍫 Garoto & GUT São Paulo</span>
+                            <h3 style="margin-top: 10px;">Todo Mundo é Garoto Propaganda</h3>
+                            <p>Decisões guiadas por dados em engajamento massivo e campanhas de conversão nacional.</p>
+                            <a href="https://acontecendoaqui.com.br/propaganda/garoto-lanca-campanha-em-parceria-com-a-gut-sao-paulo/" target="_blank" style="color: #00ff88; text-decoration: none; font-size: 0.9rem;">Ler Matéria ➔</a>
+                        </div>
+                    </div>
+                    <div class="carousel-item" style="background-image: url('boticario.png'); background-color: #240404;">
+                        <div class="carousel-overlay"></div>
+                        <div class="carousel-content">
+                            <span class="tag" style="color: #ff69b4; background: rgba(255,105,180,0.1);">✨ O Boticário</span>
+                            <h3 style="margin-top: 10px;">Dia do Amor</h3>
+                            <p>Pesquisa quanti-quali mapeando comportamento emocional para estratégias de alto engajamento.</p>
+                            <a href="https://clubedecriacao.com.br/ultimas/dia-do-amor/" target="_blank" style="color: #00ff88; text-decoration: none; font-size: 0.9rem;">Ver Case ➔</a>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-btn prev" onclick="moveSlide(-1)">❮</button>
+                <button class="carousel-btn next" onclick="moveSlide(1)">❯</button>
+            </div>
+        </div>
+
+        <div class="card" style="min-height: 360px; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+                <h3 style="font-size: 1.1rem; color: #666; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px;">Publicações Acadêmicas</h3>
+                <div class="articles-container">
+                    <div class="article-item active">
+                        <h4 style="font-size: 1.15rem; line-height: 1.4; color: #fff; margin-bottom: 8px;">Ideologias, atitudes e decisão de voto em eleitores de direita e de esquerda</h4>
+                        <p style="color: #666; font-size: 0.85rem; margin-bottom: 15px;">Revista Latinoamericana de Opinión Pública (WAPOR)<br><strong>Prêmio Edgardo Catterberg</strong> de melhor artigo[cite: 1].</p>
+                        <a href="https://www.waporlatinoamerica.org/congresos/" target="_blank" style="color: #00ff88; text-decoration: none; font-size: 0.85rem; font-weight: 600;">Ver no WAPOR ➔</a>
+                    </div>
+                    <div class="article-item">
+                        <h4 style="font-size: 1.15rem; line-height: 1.4; color: #fff; margin-bottom: 8px;">Partidos, campanhas e voto: como o eleitor decide nas municipais</h4>
+                        <p style="color: #666; font-size: 0.85rem; margin-bottom: 15px;">Revista Sociedade e Cultura (UFG)<br>Análise multivariada aplicada ao comportamento eleitoral urbano[cite: 1].</p>
+                        <a href="https://revistas.ufg.br/fcs/article/view/6903" target="_blank" style="color: #00ff88; text-decoration: none; font-size: 0.85rem; font-weight: 600;">Acessar Revista ➔</a>
+                    </div>
+                    <div class="article-item">
+                        <h4 style="font-size: 1.15rem; line-height: 1.4; color: #fff; margin-bottom: 8px;">As vozes dos médicos brasileiros, estrangeiros e cubanos</h4>
+                        <p style="color: #666; font-size: 0.85rem; margin-bottom: 15px;">JSTOR / Editora FIOCRUZ<br>Capítulo de livro focado em análise discursiva e de percepção.</p>
+                        <a href="https://www.jstor.org/stable/10.7476/9786558580140.6" target="_blank" style="color: #00ff88; text-decoration: none; font-size: 0.85rem; font-weight: 600;">Ver no JSTOR ➔</a>
+                    </div>
+                    <div class="article-item">
+                        <h4 style="font-size: 1.15rem; line-height: 1.4; color: #fff; margin-bottom: 8px;">A Cor do ENEM – 2012: Comparação entre o desempenho de brancos, pardos e pretos</h4>
+                        <p style="color: #666; font-size: 0.85rem; margin-bottom: 15px;">GEMAA / IESP-UERJ<br>Texto para discussão sobre desigualdades e performance estatística.</p>
+                        <a href="https://gemaa.iesp.uerj.br/textos-para-discussao/8-a-cor-do-enem-2012-comparacao-entre-o-desempenho-de-brancos-pardos-e-pretos/" target="_blank" style="color: #00ff88; text-decoration: none; font-size: 0.85rem; font-weight: 600;">Ler Texto de Discussão ➔</a>
+                    </div>
+                    <div class="article-item">
+                        <h4 style="font-size: 1.15rem; line-height: 1.4; color: #fff; margin-bottom: 8px;">Comportamento eleitoral e estratégia partidária: análise espaço-temporal de SP e MG</h4>
+                        <p style="color: #666; font-size: 0.85rem; margin-bottom: 15px;">Dissertação de Mestrado • Cedeplar/UFMG<br>Mapeamento geográfico sob conceitos de inovação e representação[cite: 1].</p>
+                        <a href="https://www.academia.edu/110654733/Comportamento_eleitoral_e_estrat%C3%A9gia_partid%C3%A1ria_uma_an%C3%A1lise_espa%C3%A7o_temporal_das_elei%C3%A7%C3%B5es_de_SP_e_MG_a_partir_dos_conceitos_de_inova%C3%A7%C3%A3o_e_representa%C3%A7%C3%A3o_sociais" target="_blank" style="color: #00ff88; text-decoration: none; font-size: 0.85rem; font-weight: 600;">Acessar no Academia.edu ➔</a>
+                    </div>
+                    <div class="article-item">
+                        <h4 style="font-size: 1.15rem; line-height: 1.4; color: #fff; margin-bottom: 8px;">Representação Racial no Legislativo e Comportamento Eleitoral de Cor e Raça no Brasil</h4>
+                        <p style="color: #666; font-size: 0.85rem; margin-bottom: 15px;">Tese de Doutorado • IESP-UERJ<br>Pesquisa aprofundada de dados étnico-raciais na política nacional.</p>
+                        <a href="https://bdtd.ibict.br/vufind/Record/UERJ_2829eafd99c53dd81bcf82558d68a8c3" target="_blank" style="color: #00ff88; text-decoration: none; font-size: 0.85rem; font-weight: 600;">Ver no BDTD ➔</a>
+                    </div>
+                    <div class="article-item">
+                        <h4 style="font-size: 1.15rem; line-height: 1.4; color: #fff; margin-bottom: 8px;">Como o eleitor escolhe seu prefeito: campanha e voto nas eleições municipais</h4>
+                        <p style="color: #666; font-size: 0.85rem; margin-bottom: 15px;">Editora FGV • Capítulo de Livro<br>Estudo de caso e comportamento de votos em nível local.</p>
+                        <a href="https://editora.fgv.br/produto/como-o-eleitor-escolhe-seu-prefeito-campanha-e-voto-nas-eleicoes-municipais-2027" target="_blank" style="color: #00ff88; text-decoration: none; font-size: 0.85rem; font-weight: 600;">Ver na Editora FGV ➔</a>
+                    </div>
+                </div>
+            </div>
+            <div style="display: flex; gap: 8px; margin-top: 15px;">
+                <button class="article-nav-btn" onclick="moveArticle(-1)">❮</button>
+                <button class="article-nav-btn" onclick="moveArticle(1)">❯</button>
+            </div>
+        </div>
+
+        <div class="card solutions-block">
+            <div>
+                <h3 style="font-size: 1.3rem; margin-bottom: 5px;">Soluções & Entregas</h3>
+                <p style="color: #666; font-size: 0.9rem; margin-bottom: 25px;">Engenharia analítica e inteligência de negócios orientada a resultados.</p>
+                
+                <ul class="product-list">
+                    <li class="product-item">
+                        <div class="product-icon">🎯</div>
+                        <div class="product-info">
+                            <h4>BI & Estratégia de Dados (Freelancer)</h4>
+                            <p>Arquitetura analítica estruturada de ponta a ponta e governança inteligente de frentes de dados.</p>
+                        </div>
+                    </li>
+                    <li class="product-item">
+                        <div class="product-icon">📊</div>
+                        <div class="product-info">
+                            <h4>Monitoramento & Social Listening</h4>
+                            <p>Reports periódicos avançados integrando análise aprofundada de KPIs de conversão e escuta social ativa.</p>
+                        </div>
+                    </li>
+                    <li class="product-item">
+                        <div class="product-icon">📢</div>
+                        <div class="product-info">
+                            <h4>Apresentações Executivas Premium</h4>
+                            <p>Tradução de complexidade técnica em narrativas estratégicas sob medida para tomadores de decisão C-Level.</p>
+                        </div>
+                    </li>
+                    <li class="product-item">
+                        <div class="product-icon">🔍</div>
+                        <div class="product-info">
+                            <h4>Dossiês Investigativos Quanti-Quali</h4>
+                            <p>Pesquisas robustas cruzando métodos estatísticos rigorosos e diagnósticos qualitativos contextuais.</p>
+                        </div>
+                    </li>
+                    <li class="product-item">
+                        <div class="product-icon">🤖</div>
+                        <div class="product-info">
+                            <h4>Modelagem Estatística & MMM</h4>
+                            <p>Algoritmos preditivos de Machine Learning, Media Mix Modeling, regressões multinomiais e testes de ANOVA.</p>
+                        </div>
+                    </li>
+                    <li class="product-item">
+                        <div class="product-icon">⚡</div>
+                        <div class="product-info">
+                            <h4>Dashboards Integrados & Apps Script</h4>
+                            <p>Engenharia de painéis interativos em Looker Studio, Power BI e automações complexas em ecossistemas Cloud.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div style="display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px;">
+                    <div>
+                        <span class="tag" style="color: #00ff88; background: rgba(0,255,136,0.05); font-weight: 600;">Data Simulation Demo</span>
+                        <h4 style="margin-top: 10px; font-size: 1.1rem; margin-bottom: 2px;">Análise Avançada de Clusterização (3D)</h4>
+                        <p style="color: #555; font-size: 0.8rem; margin: 0;">Dados artificiais baseados em script proprietário de segmentação.</p>
+                    </div>
+                </div>
+                <div id="cluster3DChart" style="width: 100%; height: 420px; border-radius: 16px; background: #0c0c0c; border: 1px solid #1a1a1a;"></div>
+            </div>
+        </div>
+
+    </div> <div class="contact-footer">
+        <a href="mailto:storni.tiago@gmail.com" class="contact-link">
+            <span style="color: #00ff88;">✉</span> storni.tiago@gmail.com
+        </a>
+        <a href="https://www.linkedin.com/in/tiago-prata-storni-79645548/" target="_blank" class="contact-link">
+            <span style="color: #00ff88;">➔</span> LinkedIn Profissional
+        </a>
+    </div>
+
+    <script>
+        // CARROSSEL BLOCO 3
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel-item');
+        function moveSlide(direction) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + direction + slides.length) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+
+        // CARROSSEL BLOCO 4
+        let currentArticle = 0;
+        const articles = document.querySelectorAll('.article-item');
+        function moveArticle(direction) {
+            articles[currentArticle].classList.remove('active');
+            currentArticle = (currentArticle + direction + articles.length) % articles.length;
+            articles[currentArticle].classList.add('active');
+        }
+
+        // GRÁFICO RADAR (SKILLS)
+        const ctxRadar = document.getElementById('skillsChart').getContext('2d');
+        new Chart(ctxRadar, {
+            type: 'radar',
+            data: {
+                labels: ['Data & Analytics', 'Consumer Insights', 'Marketing & Strategy', 'Complex Thinking', 'Leadership', 'Statistics', 'Frontend Dev'],
+                datasets: [{
+                    data: [90, 95, 85, 90, 85, 85, 20],
+                    borderColor: '#00ff88',
+                    backgroundColor: 'rgba(0, 255, 136, 0.08)',
+                    pointBackgroundColor: '#00ff88',
+                    pointHoverBackgroundColor: '#fff',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    r: {
+                        grid: { color: '#222' },
+                        angleLines: { color: '#222' },
+                        pointLabels: { color: '#aaa', font: { size: 10, family: "'Space Grotesk', sans-serif", weight: '600' } },
+                        ticks: { display: false },
+                        suggestedMin: 0,
+                        suggestedMax: 100
+                    }
+                }
+            }
+        });
+
+        // --- GERAÇÃO DO GRÁFICO CLUSTER 3D INTERATIVO (PLOTLY.JS) ---
+        // Função auxiliar para simular nuvens de pontos em torno de uma média (coordenadas norm)
+        function gerarPontosArtificiais(n, meanX, meanY, meanZ, std) {
+            let x = [], y = [], z = [];
+            for(let i=0; i<n; i++) {
+                x.push(Math.min(1, Math.max(0, meanX + (Math.random() - 0.5) * std)));
+                y.push(Math.min(1, Math.max(0, meanY + (Math.random() - 0.5) * std)));
+                z.push(Math.min(1, Math.max(0, meanZ + (Math.random() - 0.5) * std)));
+            }
+            return {x: x, y: y, z: z};
+        }
+
+        // Gerando as 5 nuvens correspondentes aos seus clusters em Python
+        const cl0 = gerarPontosArtificiais(25, 0.5, 0.4, 0.8, 0.15); // Verde
+        const cl1 = gerarPontosArtificiais(20, 0.2, 0.2, 0.2, 0.12); // Azul
+        const cl2 = gerarPontosArtificiais(30, 0.5, 0.9, 0.85, 0.15); // Amarelo
+        const cl3 = gerarPontosArtificiais(25, 0.8, 0.5, 0.8, 0.15); // Laranja
+        const cl4 = gerarPontosArtificiais(20, 0.8, 0.4, 0.2, 0.15); // Vermelho
+
+        // Definição das Traces estruturadas exatamente com a legenda e cores informadas
+        const trace0 = {
+            x: cl0.x, y: cl0.y, z: cl0.z, mode: 'markers', type: 'scatter3d',
+            name: 'FIDELIZADOS D’OR COM VOLUME MODERADO',
+            marker: { size: 3.5, color: '#00ff88', opacity: 0.85 }
+        };
+        const trace1 = {
+            x: cl1.x, y: cl1.y, z: cl1.z, mode: 'markers', type: 'scatter3d',
+            name: 'NÃO FIDELIZADOS D’OR COM TICKET MÉDIO BAIXO',
+            marker: { size: 3.5, color: '#00bfff', opacity: 0.85 }
+        };
+        const trace2 = {
+            x: cl2.x, y: cl2.y, z: cl2.z, mode: 'markers', type: 'scatter3d',
+            name: "FIDELIZADOS D'OR COM ALTO VOLUME",
+            marker: { size: 3.5, color: '#ffd700', opacity: 0.85 }
+        };
+        const trace3 = {
+            x: cl3.x, y: cl3.y, z: cl3.z, mode: 'markers', type: 'scatter3d',
+            name: 'FIDELIZADOS D’OR COM TICKET MÉDIO ALTO',
+            marker: { size: 3.5, color: '#ff8c00', opacity: 0.85 }
+        };
+        const trace4 = {
+            x: cl4.x, y: cl4.y, z: cl4.z, mode: 'markers', type: 'scatter3d',
+            name: 'NÃO FIDELIZADOS D’OR COM TICKET MÉDIO ALTO',
+            marker: { size: 3.5, color: '#ff4500', opacity: 0.85 }
+        };
+
+        const data3D = [trace0, trace1, trace2, trace3, trace4];
+
+        // Configurações de Layout Escuro Premium
+        const layout3D = {
+            paper_bgcolor: 'rgba(0,0,0,0)',
+            plot_bgcolor: 'rgba(0,0,0,0)',
+            margin: { l: 0, r: 0, b: 0, t: 0 },
+            showlegend: true,
+            legend: {
+                x: 0, y: 1,
+                font: { size: 9, color: '#888', family: 'Inter' },
+                bgcolor: 'rgba(10,10,10,0.6)'
+            },
+            scene: {
+                xaxis: { title: 'Custo Médio (Norm)', titlefont: {color: '#666', size: 10}, gridcolor: '#222', tickfont: {color: '#444', size: 9}, backgroundcolor: '#080808', showbackground: true },
+                yaxis: { title: 'Qtde Internações (Norm)', titlefont: {color: '#666', size: 10}, gridcolor: '#222', tickfont: {color: '#444', size: 9}, backgroundcolor: '#080808', showbackground: true },
+                zaxis: { title: "Share D'Or (Norm)", titlefont: {color: '#666', size: 10}, gridcolor: '#222', tickfont: {color: '#444', size: 9}, backgroundcolor: '#080808', showbackground: true },
+                camera: { eye: { x: 1.5, y: 1.5, z: 1.2 } }
+            }
+        };
+
+        const config3D = { responsive: true, displayModeBar: false };
+
+        // Renderização nativa do Gráfico 3D interativo
+        Plotly.newPlot('cluster3DChart', data3D, layout3D, config3D);
+    </script>
+</body>
+</html>
