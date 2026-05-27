@@ -183,12 +183,6 @@
             opacity: 0.9;
         }
 
-        .hero-buttons {
-            display: flex;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
-
         .btn {
             display: inline-block;
             background: var(--accent);
@@ -208,17 +202,6 @@
         .btn:hover {
             opacity: 0.9;
             transform: translateY(-2px);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            border: 1px solid var(--accent);
-            color: var(--accent);
-        }
-
-        .btn-secondary:hover {
-            background: var(--accent);
-            color: var(--accent-foreground);
         }
 
         /* Divider */
@@ -461,7 +444,7 @@
             height: 520px;
         }
 
-        /* Articles Section */
+        /* Articles Section (Rotativo Inteligente) */
         .articles-container {
             max-width: 1200px;
             margin: 0 auto;
@@ -546,201 +529,6 @@
             color: var(--accent);
         }
 
-        /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 2000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(4px);
-            animation: fadeIn 0.3s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .modal.active {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-content {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 24px;
-            padding: 40px;
-            max-width: 600px;
-            width: 90%;
-            max-height: 90vh;
-            overflow-y: auto;
-            animation: slideUp 0.3s ease;
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 24px;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 16px;
-        }
-
-        .modal-header h2 {
-            margin: 0;
-            font-size: 1.6rem;
-            border: none;
-            padding: 0;
-        }
-
-        .modal-close {
-            background: none;
-            border: none;
-            color: var(--muted-foreground);
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: color 0.3s ease;
-        }
-
-        .modal-close:hover {
-            color: var(--accent);
-        }
-
-        /* Form Styles */
-        .form-group {
-            margin-bottom: 24px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: var(--foreground);
-            font-size: 0.95rem;
-        }
-
-        .form-group textarea,
-        .form-group input {
-            width: 100%;
-            padding: 12px;
-            background: var(--muted);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            color: var(--foreground);
-            font-family: 'Inter', sans-serif;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
-        }
-
-        .form-group textarea:focus,
-        .form-group input:focus {
-            outline: none;
-            border-color: var(--accent);
-            background: rgba(0, 255, 136, 0.05);
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
-
-        .checkbox-group,
-        .radio-group {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .checkbox-item,
-        .radio-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .checkbox-item input[type="checkbox"],
-        .radio-item input[type="radio"] {
-            width: auto;
-            padding: 0;
-            cursor: pointer;
-            accent-color: var(--accent);
-        }
-
-        .checkbox-item label,
-        .radio-item label {
-            margin: 0;
-            cursor: pointer;
-            font-weight: 400;
-            color: var(--muted-foreground);
-        }
-
-        .checkbox-item input[type="checkbox"]:checked + label,
-        .radio-item input[type="radio"]:checked + label {
-            color: var(--accent);
-        }
-
-        .form-actions {
-            display: flex;
-            gap: 12px;
-            margin-top: 32px;
-        }
-
-        .form-actions button {
-            flex: 1;
-            padding: 12px 24px;
-            border-radius: 8px;
-            border: none;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 0.95rem;
-        }
-
-        .form-actions .btn-submit {
-            background: var(--accent);
-            color: var(--accent-foreground);
-        }
-
-        .form-actions .btn-submit:hover {
-            opacity: 0.9;
-        }
-
-        .form-actions .btn-cancel {
-            background: transparent;
-            border: 1px solid var(--border);
-            color: var(--muted-foreground);
-        }
-
-        .form-actions .btn-cancel:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-        }
-
-        .form-note {
-            font-size: 0.85rem;
-            color: var(--muted-foreground);
-            margin-top: 16px;
-            text-align: center;
-        }
-
         /* Fixed Bar Footer */
         .footer {
             position: fixed;
@@ -773,9 +561,6 @@
             font-size: 0.95rem;
             font-weight: 500;
             transition: color 0.3s ease;
-            cursor: pointer;
-            border: none;
-            background: none;
         }
 
         .footer-link:hover {
@@ -793,14 +578,12 @@
             .hero-content { grid-template-columns: 1fr; gap: 32px; text-align: center; }
             .hero-image { order: -1; }
             .hero-tags { justify-content: center; }
-            .hero-buttons { justify-content: center; }
             .about-grid { grid-template-columns: 1fr; gap: 24px; }
             .solutions-grid { grid-template-columns: 1fr; gap: 15px; }
             .carousel { height: 320px; }
             .carousel-content { max-width: 100%; }
             #cluster3DChart { height: 400px; }
             .footer-content { gap: 20px; }
-            .modal-content { padding: 24px; }
         }
     </style>
 </head>
@@ -817,30 +600,24 @@
                 <div class="hero-tags">
                     <span class="tag">Data Analyst & Strategist</span>
                     <span class="tag" style="background: #111; color: #888;">
-                        <span class="pt">Fluência: inglês • francês • espanhol</span>
-                        <span class="en">Fluency: English • French • Spanish</span>
+                        <span class="pt">Fluência: português • inglês • francês • espanhol</span>
+                        <span class="en">Fluency: Portuguese • English • French • Spanish</span>
                     </span>
                 </div>
                 <h1>Tiago Prata</h1>
-                <p class="hero-subtitle">Agê</p>
+                <p class="hero-subtitle">Agê
                 <p class="hero-description">
-                    <span class="pt">Há mais de 10 anos traduzindo dados complexos em estratégias de mercado de alto impacto. Especialista em comportamento do consumidor, combino ciência de dados (SQL/Python/Pandas) e inteligência competitiva para transformar métricas brutas em narrativas de negócios. Experiência em top Agências no Brasil, como GUT, Artplan, Moringa, FSB e Calia.</span>
-                    <span class="en">For over 10 years translating complex data into high-impact market strategies. Specialist in consumer behavior, I combine data science (SQL/Python/Pandas) and competitive intelligence to transform raw metrics into business narratives. Experience across top ad agencies in Brazil, including Artplan, Moringa, FSB, GUT, and Calia.</span>
+                    <span class="pt">Há mais de 10 anos traduzindo dados complexos em estratégias de mercado de alto impacto. Especialista em comportamento do consumidor, combino ciência de dados (SQL/Python/Pandas) e inteligência competitiva para transformar métricas brutas em narrativas de negócios.</span>
+                    <span class="en">For over 10 years translating complex data into high-impact market strategies. Specialist in consumer behavior, I combine data science (SQL/Python/Pandas) and competitive intelligence to transform raw metrics into business narratives.</span>
                 </p>
                 <p class="hero-quote">
                     <span class="pt">"Dê-me os dados e entregarei insights acionáveis."</span>
                     <span class="en">"Give me the data, and I will deliver actionable insights."</span>
                 </p>
-                <div class="hero-buttons">
-                    <a href="https://wa.me/5561996042835" target="_blank" rel="noopener noreferrer" class="btn">
-                        <span class="pt">Conversar via WhatsApp</span>
-                        <span class="en">Let's Talk on WhatsApp</span>
-                    </a>
-                    <button class="btn btn-secondary" onclick="openBriefingForm()">
-                        <span class="pt">Solicitar Orçamento</span>
-                        <span class="en">Request Quote</span>
-                    </button>
-                </div>
+                <a href="https://wa.me/5561996042835" target="_blank" rel="noopener noreferrer" class="btn" style="display: inline-block;">
+                    <span class="pt">Conversar via WhatsApp</span>
+                    <span class="en">Let's Talk on WhatsApp</span>
+                </a>
             </div>
         </div>
     </section>
@@ -894,10 +671,6 @@
                         <span class="skill-tag">CRM Systems</span>
                         <span class="skill-tag">Quanti-Quali Methods</span>
                         <span class="skill-tag">Social Listening Analysis</span>
-                        <span class="skill-tag">Dashboards</span>
-                        <span class="skill-tag">KPI's SMART</span>
-                        <span class="skill-tag">Trend Reports</span>
-                        <span class="skill-tag">Statistcs - analysis, tests, regressions</span>
                     </div>
                 </div>
             </div>
@@ -995,18 +768,69 @@
                             <span class="tag">🚀 GUT Cannes 2023</span>
                             <h3 style="color: white; margin-top: 12px;">To Go Wild</h3>
                             <p>
-                                <span class="pt">Modelagem preditiva e engenharia de insights direcionados para uma das campanhas mais inovadoras do ano.</span>
-                                <span class="en">Predictive modeling and insight engineering for one of the year's most innovative campaigns.</span>
+                                <span class="pt">Modelagem preditiva e engenharia de insights direcionados à performance estratégica global em parceria com a GUT.</span>
+                                <span class="en">Data modeling and predictive engineering directed at global strategic performance metrics in a core partnership with GUT.</span>
                             </p>
-                            <a href="#" class="btn" style="padding: 8px 20px; font-size: 0.85rem;">
-                                <span class="pt">Ver Campanha ➔</span><span class="en">View Campaign ➔</span>
+                            <a href="https://clubedecriacao.com.br/acervo/to-go-wild-gut-cannes-2023/" target="_blank" rel="noopener noreferrer" class="btn" style="padding: 8px 20px; font-size: 0.85rem;">
+                                <span class="pt">Clube de Criação ➔</span><span class="en">Clube de Criação ➔</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="carousel-item" style="background-image: url('spaten.png'); background-color: #03240d;">
+                        <div class="carousel-overlay"></div>
+                        <div class="carousel-content">
+                            <span class="tag">🍺 Spaten</span>
+                            <h3 style="color: white; margin-top: 12px;">
+                                <span class="pt">Multiverso da Força</span>
+                                <span class="en">Multiverse of Strength</span>
+                            </h3>
+                            <p>
+                                <span class="pt">Análise robusta de social listening e arquiteturas de monitoramento em tempo real para consolidação de marca.</span>
+                                <span class="en">Robust social listening pipelines and real-time community data tracking designed for sustainable brand consolidation.</span>
+                            </p>
+                            <a href="https://clubedecriacao.com.br/ultimas/pre-estreia-2-220/" target="_blank" rel="noopener noreferrer" class="btn" style="padding: 8px 20px; font-size: 0.85rem;">
+                                <span class="pt">Ver Detalhes ➔</span><span class="en">View Details ➔</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="carousel-item" style="background-image: url('garoto.png'); background-color: #2b2402;">
+                        <div class="carousel-overlay"></div>
+                        <div class="carousel-content">
+                            <span class="tag">🍫 Garoto & GUT São Paulo</span>
+                            <h3 style="color: white; margin-top: 12px;">
+                                <span class="pt">Todo Mundo é Garoto Propaganda</span>
+                                <span class="en">Everyone is a Spokesperson</span>
+                            </h3>
+                            <p>
+                                <span class="pt">Decisões orientadas por dados em engajamento massivo e otimização de funil de conversão nacional.</span>
+                                <span class="en">Data-driven decisions mapped across massive user engagement and large-scale national communication funnels.</span>
+                            </p>
+                            <a href="https://acontecendoaqui.com.br/propaganda/garoto-lanca-campanha-em-parceria-com-a-gut-sao-paulo/" target="_blank" rel="noopener noreferrer" class="btn" style="padding: 8px 20px; font-size: 0.85rem;">
+                                <span class="pt">Ler Matéria ➔</span><span class="en">Read Article ➔</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="carousel-item" style="background-image: url('boticario.png'); background-color: #240404;">
+                        <div class="carousel-overlay"></div>
+                        <div class="carousel-content">
+                            <span class="tag">✨ O Boticário</span>
+                            <h3 style="color: white; margin-top: 12px;">
+                                <span class="pt">Dia do Amor</span>
+                                <span class="en">Day of Love</span>
+                            </h3>
+                            <p>
+                                <span class="pt">Mapeamento qualitativo-quantitativo de dados emocionais orientando estratégias digitais de alto engajamento.</span>
+                                <span class="en">Quali-quanti computational mapping tracking emotional consumer metrics to power digital activation strategies.</span>
+                            </p>
+                            <a href="https://clubedecriacao.com.br/ultimas/dia-do-amor/" target="_blank" rel="noopener noreferrer" class="btn" style="padding: 8px 20px; font-size: 0.85rem;">
+                                <span class="pt">Ver Case ➔</span><span class="en">View Case ➔</span>
                             </a>
                         </div>
                     </div>
                 </div>
+                <button class="carousel-btn prev" onclick="prevAward()">‹</button>
+                <button class="carousel-btn next" onclick="nextAward()">›</button>
             </div>
-            <button class="carousel-btn prev" onclick="prevAward()">‹</button>
-            <button class="carousel-btn next" onclick="nextAward()">›</button>
         </div>
     </section>
 
@@ -1029,194 +853,48 @@
     <section>
         <div class="articles-container">
             <h2>
-                <span class="pt">Artigos & Insights</span>
-                <span class="en">Articles & Insights</span>
+                <span class="pt">Publicações Acadêmicas</span>
+                <span class="en">Academic Publications</span>
             </h2>
             <div class="article-card">
                 <div>
-                    <h3 id="article-title">
-                        <span class="pt">Por que dados sem estratégia são apenas números</span>
-                        <span class="en">Why data without strategy is just numbers</span>
-                    </h3>
-                    <p id="article-excerpt">
-                        <span class="pt">A diferença entre coletar dados e transformá-los em decisões de negócio...</span>
-                        <span class="en">The difference between collecting data and transforming it into business decisions...</span>
-                    </p>
-                    <p class="article-date" id="article-date">15/05/2024</p>
+                    <h3 id="article-title">---</h3>
+                    <p id="article-excerpt">---</p>
                 </div>
+                
                 <div class="article-footer-row">
-                    <a href="#" class="article-link">
-                        <span class="pt">Ler Artigo ➔</span>
-                        <span class="en">Read Article ➔</span>
-                    </a>
-                    <div class="article-nav">
-                        <button onclick="prevArticle()">‹</button>
-                        <button onclick="nextArticle()">›</button>
+                    <div>
+                        <p class="article-date" id="article-date" style="margin: 0; color: #555;">---</p>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 20px;">
+                        <a href="#" id="article-link-href" target="_blank" rel="noopener noreferrer" class="article-link">
+                            <span class="pt">Acessar Publicação ➔</span>
+                            <span class="en">Access Publication ➔</span>
+                        </a>
+                        <div class="article-nav">
+                            <button onclick="prevArticle()">‹</button>
+                            <button onclick="nextArticle()">›</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Briefing Form Modal -->
-    <div id="briefingModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>
-                    <span class="pt">Solicitar Orçamento</span>
-                    <span class="en">Request a Quote</span>
-                </h2>
-                <button class="modal-close" onclick="closeBriefingForm()">✕</button>
-            </div>
-
-            <form id="briefingForm" onsubmit="submitBriefingForm(event)">
-                <!-- Question 1: Briefing -->
-                <div class="form-group">
-                    <label for="briefing">
-                        <span class="pt">1. Descreva seu briefing / projeto</span>
-                        <span class="en">1. Describe your briefing / project</span>
-                    </label>
-                    <textarea id="briefing" name="briefing" required placeholder="Conte-me sobre seu projeto, desafios e objetivos..."></textarea>
-                </div>
-
-                <!-- Question 2: Product Type -->
-                <div class="form-group">
-                    <label>
-                        <span class="pt">2. Tipo de produto/serviço desejado</span>
-                        <span class="en">2. Type of product/service desired</span>
-                    </label>
-                    <div class="checkbox-group">
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="dashboard" name="productType" value="Dashboard">
-                            <label for="dashboard">Dashboard</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="fullReport" name="productType" value="Full Report">
-                            <label for="fullReport">
-                                <span class="pt">Relatório Completo</span>
-                                <span class="en">Full Report</span>
-                            </label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="flashReport" name="productType" value="Flash Report">
-                            <label for="flashReport">Flash Report</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="investigativeDossier" name="productType" value="Investigative Dossier">
-                            <label for="investigativeDossier">
-                                <span class="pt">Dossiê Investigativo</span>
-                                <span class="en">Investigative Dossier</span>
-                            </label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="statisticalModeling" name="productType" value="Statistical Modeling & Complex Analysis">
-                            <label for="statisticalModeling">
-                                <span class="pt">Modelagem Estatística & Análises Complexas</span>
-                                <span class="en">Statistical Modeling & Complex Analysis</span>
-                            </label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="notSure" name="productType" value="I don't know yet">
-                            <label for="notSure">
-                                <span class="pt">Ainda não tenho certeza</span>
-                                <span class="en">I don't know yet</span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Question 3: Periodicity -->
-                <div class="form-group">
-                    <label>
-                        <span class="pt">3. Periodicidade / Frequência</span>
-                        <span class="en">3. Periodicity / Frequency</span>
-                    </label>
-                    <div class="radio-group">
-                        <div class="radio-item">
-                            <input type="radio" id="oneTime" name="periodicity" value="One-time" required>
-                            <label for="oneTime">
-                                <span class="pt">Projeto Único</span>
-                                <span class="en">One-time Project</span>
-                            </label>
-                        </div>
-                        <div class="radio-item">
-                            <input type="radio" id="daily" name="periodicity" value="Daily">
-                            <label for="daily">
-                                <span class="pt">Diariamente</span>
-                                <span class="en">Daily</span>
-                            </label>
-                        </div>
-                        <div class="radio-item">
-                            <input type="radio" id="weekly" name="periodicity" value="Weekly">
-                            <label for="weekly">
-                                <span class="pt">Semanalmente</span>
-                                <span class="en">Weekly</span>
-                            </label>
-                        </div>
-                        <div class="radio-item">
-                            <input type="radio" id="monthly" name="periodicity" value="Monthly">
-                            <label for="monthly">
-                                <span class="pt">Mensalmente</span>
-                                <span class="en">Monthly</span>
-                            </label>
-                        </div>
-                        <div class="radio-item">
-                            <input type="radio" id="periodNotSure" name="periodicity" value="I don't know yet">
-                            <label for="periodNotSure">
-                                <span class="pt">Ainda não tenho certeza</span>
-                                <span class="en">I don't know yet</span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-note">
-                    <span class="pt">Após enviar, você receberá uma estimativa de orçamento por email em até 24 horas.</span>
-                    <span class="en">After submitting, you'll receive a budget estimate via email within 24 hours.</span>
-                </div>
-
-                <div class="form-actions">
-                    <button type="submit" class="btn-submit">
-                        <span class="pt">Enviar Briefing</span>
-                        <span class="en">Submit Briefing</span>
-                    </button>
-                    <button type="button" class="btn-cancel" onclick="closeBriefingForm()">
-                        <span class="pt">Cancelar</span>
-                        <span class="en">Cancel</span>
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
             <a href="mailto:storni.tiago@gmail.com" class="footer-link">
                 <span class="footer-icon">✉</span>
                 <span>storni.tiago@gmail.com</span>
             </a>
-            <a href="https://wa.me/5561996042835" target="_blank" class="footer-link">
+            <a href="https://wa.me/5561996042835" target="_blank" rel="noopener noreferrer" class="footer-link">
                 <span class="footer-icon">💬</span>
-                <span>
-                    <span class="pt">WhatsApp</span>
-                    <span class="en">WhatsApp</span>
-                </span>
+                <span>WhatsApp</span>
             </a>
-            <a href="https://www.linkedin.com/in/tiago-prata-storni-79645548/" target="_blank" class="footer-link">
+            <a href="https://www.linkedin.com/in/tiago-prata-storni-79645548/" target="_blank" rel="noopener noreferrer" class="footer-link">
                 <span class="footer-icon">➔</span>
-                <span>
-                    <span class="pt">LinkedIn Profissional</span>
-                    <span class="en">Professional LinkedIn</span>
-                </span>
+                <span>LinkedIn</span>
             </a>
-            <button class="footer-link" onclick="openBriefingForm()">
-                <span class="footer-icon">📋</span>
-                <span>
-                    <span class="pt">Solicitar Orçamento</span>
-                    <span class="en">Request Quote</span>
-                </span>
-            </button>
         </div>
     </footer>
 
@@ -1224,60 +902,16 @@
         // Language Toggle
         function toggleLanguage() {
             const html = document.documentElement;
-            const btn = document.getElementById('langBtn');
             if (html.classList.contains('lang-en')) {
                 html.classList.remove('lang-en');
-                btn.textContent = '🇺🇸 EN';
+                document.getElementById('langBtn').innerHTML = '🇺🇸 EN';
             } else {
                 html.classList.add('lang-en');
-                btn.textContent = '🇧🇷 PT';
+                document.getElementById('langBtn').innerHTML = '🇧🇷 PT';
             }
-        }
-
-        // Modal Functions
-        function openBriefingForm() {
-            document.getElementById('briefingModal').classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeBriefingForm() {
-            document.getElementById('briefingModal').classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-
-        // Close modal when clicking outside
-        document.getElementById('briefingModal').addEventListener('click', function(event) {
-            if (event.target === this) {
-                closeBriefingForm();
-            }
-        });
-
-        // Form Submission
-        function submitBriefingForm(event) {
-            event.preventDefault();
-            
-            const briefing = document.getElementById('briefing').value;
-            const productTypes = Array.from(document.querySelectorAll('input[name="productType"]:checked')).map(el => el.value).join(', ');
-            const periodicity = document.querySelector('input[name="periodicity"]:checked').value;
-            
-            // Create email body
-            const subject = encodeURIComponent('Novo Briefing Recebido - Solicitação de Orçamento');
-            const body = encodeURIComponent(
-                `Novo Briefing Recebido:\n\n` +
-                `BRIEFING:\n${briefing}\n\n` +
-                `TIPO DE PRODUTO:\n${productTypes || 'Não especificado'}\n\n` +
-                `PERIODICIDADE:\n${periodicity}\n\n` +
-                `---\nMensagem enviada através do formulário de orçamento do portfólio.`
-            );
-            
-            // Send via mailto (you can replace with Formspree or other service)
-            window.location.href = `mailto:storni.tiago@gmail.com?subject=${subject}&body=${body}`;
-            
-            // Close modal after submission
-            setTimeout(() => {
-                closeBriefingForm();
-                document.getElementById('briefingForm').reset();
-            }, 500);
+            // Atualiza os componentes que dependem do gatilho de idioma direto
+            updateArticle();
+            initChart();
         }
 
         // Awards Carousel
@@ -1299,30 +933,97 @@
             showAward(currentAward);
         }
 
-        // Articles Data
+        // Banco de Dados das suas 7 Publicações Reais [cite: 1, 7, 722, 747]
         const articles = [
             {
+                url: "https://www.waporlatinoamerica.org/congresos/",
                 pt: {
-                    title: 'Por que dados sem estratégia são apenas números',
-                    excerpt: 'A diferença entre coletar dados e transformá-los em decisões de negócio...',
-                    date: '15/05/2024'
+                    title: 'Ideologias, atitudes e decisão de voto em eleitores de direita e de esquerda',
+                    excerpt: 'Revista Latinoamericana de Opinión Pública (WAPOR) • Vencedor do 1º Prêmio Edgardo Catterberg de melhor artigo.',
+                    date: 'WAPOR / LATAM'
                 },
                 en: {
-                    title: 'Why data without strategy is just numbers',
-                    excerpt: 'The difference between collecting data and transforming it into business decisions...',
-                    date: '5/15/2024'
+                    title: 'Ideologies, attitudes and voting decisions among right and left-wing voters',
+                    excerpt: 'Revista Latinoamericana de Opinión Pública (WAPOR) • Winner of the 1st Edgardo Catterberg Award for best paper.',
+                    date: 'WAPOR / LATAM'
                 }
             },
             {
+                url: "https://revistas.ufg.br/fcs/article/view/6903",
                 pt: {
-                    title: 'Segmentação comportamental: o novo ouro',
-                    excerpt: 'Como entender realmente quem são seus clientes além dos números...',
-                    date: '20/04/2024'
+                    title: 'Partidos, campanhas e voto: como o eleitor decide nas municipais',
+                    excerpt: 'Revista Sociedade e Cultura (UFG) • Investigação econométrica estrutural e espacial sobre comportamento de voto urbano.',
+                    date: 'REVISTA UFG'
                 },
                 en: {
-                    title: 'Behavioral segmentation: the new gold',
-                    excerpt: 'How to truly understand who your customers are beyond the numbers...',
-                    date: '4/20/2024'
+                    title: 'Parties, campaigns, and voting: municipal behavioral insights',
+                    excerpt: 'Sociedade e Cultura Journal (UFG) • Structural econometric and spatial modeling mapping urban voter behaviors.',
+                    date: 'UFG JOURNAL'
+                }
+            },
+            {
+                url: "https://www.jstor.org/stable/10.7476/9786558580140.6",
+                pt: {
+                    title: 'As vozes dos médicos brasileiros, estrangeiros e cubanos',
+                    excerpt: 'JSTOR / Editora FIOCRUZ • Capítulo de livro focado em mineração de dados textuais, análise de discurso e de percepção.',
+                    date: 'FIOCRUZ / JSTOR'
+                },
+                en: {
+                    title: 'The voices of Brazilian, foreign, and Cuban doctors',
+                    excerpt: 'JSTOR / FIOCRUZ Publishing • Advanced text mining, discourse tracking, and perceptual sentiment mapping analysis.',
+                    date: 'FIOCRUZ / JSTOR'
+                }
+            },
+            {
+                url: "https://gemaa.iesp.uerj.br/textos-para-discussao/8-a-cor-do-enem-2012-comparacao-entre-o-desempenho-de-brancos-pardos-e-pretos/",
+                pt: {
+                    title: 'A Cor do ENEM – 2012: Comparação entre o desempenho de brancos, pardos e pretos',
+                    excerpt: 'GEMAA / IESP-UERJ • Texto para discussão científica destrinchando disparidades socioeconômicas e performance estatística.',
+                    date: 'IESP / UERJ'
+                },
+                en: {
+                    title: 'The Color of ENEM – 2012: Performance gaps across white, brown, and black students',
+                    excerpt: 'GEMAA / IESP-UERJ • Technical discussion paper breaking down demographic socioeconomic variances via statistical metrics.',
+                    date: 'IESP / UERJ'
+                }
+            },
+            {
+                url: "https://www.academia.edu/110654733/Comportamento_eleitoral_e_estrat%C3%A9gia_partid%C3%A1ria_uma_an%C3%A1lise_espa%C3%A7o_temporal_das_elei%C3%A7%C3%B5es_de_SP_e_MG_a_partir_dos_conceitos_de_inova%C3%A7%C3%A3o_e_representa%C3%A7%C3%A3o_sociais",
+                pt: {
+                    title: 'Comportamento eleitoral e estratégia partidária: análise espaço-temporal de SP e MG',
+                    excerpt: 'Dissertação de Mestrado • Cedeplar/UFMG • Modelagem espacial complexa fundamentada em representações e inovações sociais.',
+                    date: 'UFMG / MESTRADO'
+                },
+                en: {
+                    title: 'Electoral behavior and party strategy: a spatiotemporal analysis of SP and MG',
+                    excerpt: "Master's Thesis • Cedeplar/UFMG • High-dimensional spatial econometric tracking modeled on social representations.",
+                    date: 'UFMG / THESIS'
+                }
+            },
+            {
+                url: "https://bdtd.ibict.br/vufind/Record/UERJ_2829eafd99c53dd81bcf82558d68a8c3",
+                pt: {
+                    title: 'Representação Racial no Legislativo e Comportamento Eleitoral de Cor e Raça no Brasil',
+                    excerpt: 'Tese de Doutorado • IESP-UERJ • Mineração demográfica aprofundada de dados étnico-raciais na estrutura política nacional.',
+                    date: 'IESP UERJ / DOUTORADO'
+                },
+                en: {
+                    title: 'Racial Representation in the Legislature and Electoral Behavior of Color and Race in Brazil',
+                    excerpt: 'PhD Dissertation • IESP-UERJ • Advanced demographic analysis mapping institutional ethno-racial datasets.',
+                    date: 'IESP UERJ / PHD'
+                }
+            },
+            {
+                url: "https://editora.fgv.br/produto/como-o-eleitor-escolhe-seu-prefeito-campanha-e-voto-nas-eleicoes-municipais-2027",
+                pt: {
+                    title: 'Como o eleitor escolhe seu prefeito: campanha e voto nas eleições municipais',
+                    excerpt: 'Editora FGV • Capítulo de livro destrinchando modelagens amostrais de comportamento local de voto.',
+                    date: 'EDITORA FGV'
+                },
+                en: {
+                    title: 'How voters choose their mayor: campaign paths and voting mechanics',
+                    excerpt: 'FGV Publishing • Comprehensive book chapter auditing municipal tracking data and localized voter trends.',
+                    date: 'FGV PUBLISHING'
                 }
             }
         ];
@@ -1335,6 +1036,7 @@
             document.getElementById('article-title').textContent = article.title;
             document.getElementById('article-excerpt').textContent = article.excerpt;
             document.getElementById('article-date').textContent = article.date;
+            document.getElementById('article-link-href').href = articles[currentArticle].url;
         }
 
         function nextArticle() {
@@ -1370,6 +1072,10 @@
                 ? ['FIDELIZADOS COM VOLUME MODERADO', 'NÃO FIDELIZADOS COM TICKET BAIXO', 'FIDELIZADOS COM ALTO VOLUME', 'FIDELIZADOS COM TICKET ALTO', 'NÃO FIDELIZADOS COM TICKET ALTO']
                 : ['LOYAL WITH MODERATE VOLUME', 'NON-LOYAL WITH LOW TICKET', 'LOYAL WITH HIGH VOLUME', 'LOYAL WITH HIGH TICKET', 'NON-LOYAL WITH HIGH TICKET'];
 
+            const axisTitles = lang === 'pt'
+                ? ['Custo Médio (Normalizado)', 'Quantidade Internações (Normalizado)', "Share D'Or (Normalizado)"]
+                : ['Average Cost (Normalized)', 'Sales Qty (Normalized)', 'Share (Normalized)'];
+
             const traces = [
                 { x: cl0.x, y: cl0.y, z: cl0.z, mode: 'markers', type: 'scatter3d', name: labels[0], marker: { size: 3.5, color: '#00ff88', opacity: 0.85 } },
                 { x: cl1.x, y: cl1.y, z: cl1.z, mode: 'markers', type: 'scatter3d', name: labels[1], marker: { size: 3.5, color: '#00bfff', opacity: 0.85 } },
@@ -1385,9 +1091,9 @@
                 showlegend: true,
                 legend: { x: 0, y: 1, font: { size: 9, color: '#888', family: 'Inter' }, bgcolor: 'rgba(10,10,10,0.6)' },
                 scene: {
-                    xaxis: { title: 'Average Cost (Norm)', titlefont: { color: '#666', size: 10 }, gridcolor: '#222', tickfont: { color: '#444', size: 9 }, backgroundcolor: '#080808', showbackground: true },
-                    yaxis: { title: 'Sales Qty (Norm)', titlefont: { color: '#666', size: 10 }, gridcolor: '#222', tickfont: { color: '#444', size: 9 }, backgroundcolor: '#080808', showbackground: true },
-                    zaxis: { title: 'Share (Norm)', titlefont: { color: '#666', size: 10 }, gridcolor: '#222', tickfont: { color: '#444', size: 9 }, backgroundcolor: '#080808', showbackground: true },
+                    xaxis: { title: axisTitles[0], titlefont: { color: '#666', size: 10 }, gridcolor: '#222', tickfont: { color: '#444', size: 9 }, backgroundcolor: '#080808', showbackground: true },
+                    yaxis: { title: axisTitles[1], titlefont: { color: '#666', size: 10 }, gridcolor: '#222', tickfont: { color: '#444', size: 9 }, backgroundcolor: '#080808', showbackground: true },
+                    zaxis: { title: axisTitles[2], titlefont: { color: '#666', size: 10 }, gridcolor: '#222', tickfont: { color: '#444', size: 9 }, backgroundcolor: '#080808', showbackground: true },
                     camera: { eye: { x: 1.5, y: 1.5, z: 1.2 } }
                 }
             };
@@ -1396,7 +1102,7 @@
             Plotly.newPlot('cluster3DChart', traces, layout, config);
         }
 
-        // Initialize on page load
+        // Inicialização global da página
         window.addEventListener('DOMContentLoaded', () => {
             initChart();
             updateArticle();
