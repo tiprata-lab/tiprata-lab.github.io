@@ -1231,6 +1231,8 @@
                 html.classList.add('lang-en');
                 btn.textContent = '🇧🇷 PT';
             }
+            updateArticle();
+            initChart();
         }
 
         // Modal Functions
@@ -1297,13 +1299,6 @@
             currentAward = (currentAward - 1 + awardItems.length) % awardItems.length;
             showAward(currentAward);
         }
-
-        // Language Toggle - Update articles when language changes
-        const originalToggleLanguage = toggleLanguage;
-        toggleLanguage = function() {
-            originalToggleLanguage();
-            updateArticle();
-        };
 
         // Banco de Dados das 7 Publicações Acadêmicas
         const articles = [
