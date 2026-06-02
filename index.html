@@ -440,10 +440,49 @@
         .carousel-btn.prev { left: 20px; }
         .carousel-btn.next { right: 20px; }
 
-        /* 3D Chart Section */
-        .chart-container {
+        /* Methodology Carousel */
+        .methodology-section {
             max-width: 1200px;
             margin: 0 auto;
+        }
+
+        .methodology-tabs {
+            display: flex;
+            gap: 0;
+            margin-bottom: 28px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .method-tab {
+            padding: 12px 22px;
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid transparent;
+            color: var(--muted-foreground);
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            margin-bottom: -1px;
+            white-space: nowrap;
+        }
+
+        .method-tab:hover { color: var(--foreground); }
+        .method-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+        .method-slide { display: none; animation: fadeSlide 0.35s ease; }
+        .method-slide.active { display: block; }
+
+        @keyframes fadeSlide {
+            from { opacity: 0; transform: translateY(8px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Chart containers */
+        .chart-container {
             background: var(--card);
             border: 1px solid var(--border);
             border-radius: 24px;
@@ -456,9 +495,150 @@
             box-shadow: 0 10px 30px rgba(0, 255, 136, 0.02);
         }
 
-        #cluster3DChart {
+        #cluster3DChart, #regressionChart { width: 100%; height: 520px; }
+
+        .method-label {
+            display: inline-block;
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--muted-foreground);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 14px;
+            border: 1px solid var(--border);
+            padding: 4px 10px;
+            border-radius: 6px;
+        }
+
+        /* Report One Page */
+        .report-onepage {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 32px;
+        }
+
+        .report-header {
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 16px;
+            margin-bottom: 20px;
+        }
+
+        .report-header h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--foreground);
+            line-height: 1.4;
+            margin-bottom: 6px;
+        }
+
+        .report-header p {
+            font-size: 0.8rem;
+            color: var(--muted-foreground);
+        }
+
+        .report-kpis {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
+        }
+
+        .report-kpi {
+            background: var(--muted);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 12px 18px;
+            flex: 1;
+            min-width: 120px;
+            text-align: center;
+        }
+
+        .report-kpi .kpi-val {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--accent);
+            display: block;
+        }
+
+        .report-kpi .kpi-lbl {
+            font-size: 0.68rem;
+            color: var(--muted-foreground);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .report-body {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .report-block h4 {
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 12px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .report-narrative { list-style: none; }
+
+        .report-narrative li {
+            font-size: 0.82rem;
+            color: #bbb;
+            line-height: 1.6;
+            margin-bottom: 9px;
+            padding-left: 12px;
+            border-left: 2px solid #2a2a2a;
+        }
+
+        .report-narrative li strong { color: var(--foreground); }
+
+        .report-table {
             width: 100%;
-            height: 520px;
+            border-collapse: collapse;
+            font-size: 0.78rem;
+        }
+
+        .report-table th {
+            color: var(--muted-foreground);
+            font-weight: 600;
+            text-align: left;
+            padding: 6px 8px;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.68rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .report-table td {
+            padding: 7px 8px;
+            color: #bbb;
+            border-bottom: 1px solid #181818;
+            font-size: 0.8rem;
+        }
+
+        .report-table td.num {
+            color: var(--accent);
+            font-weight: 600;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .tag-pos { color: #00ff88; font-size: 0.68rem; font-weight: 700; }
+        .tag-neg { color: #ff4500; font-size: 0.68rem; font-weight: 700; }
+        .tag-neu { color: #888; font-size: 0.68rem; font-weight: 700; }
+
+        #sentimentChart { width: 100%; height: 180px; }
+
+        @media (max-width: 900px) {
+            .report-body { grid-template-columns: 1fr; }
+            .methodology-tabs { overflow-x: auto; }
+            #cluster3DChart, #regressionChart { height: 400px; }
         }
 
         /* Articles Section */
@@ -798,7 +978,6 @@
             .solutions-grid { grid-template-columns: 1fr; gap: 15px; }
             .carousel { height: 320px; }
             .carousel-content { max-width: 100%; }
-            #cluster3DChart { height: 400px; }
             .footer-content { gap: 20px; }
             .modal-content { padding: 24px; }
         }
@@ -1016,11 +1195,190 @@
     <section>
         <div class="container">
             <h2>
-                <span class="pt">Análise de Clusters 3D</span>
-                <span class="en">3D Cluster Analysis</span>
+                <span class="pt">Metodologias Analíticas</span>
+                <span class="en">Analytical Methodologies</span>
             </h2>
-            <div class="chart-container">
-                <div id="cluster3DChart"></div>
+
+            <div class="methodology-section">
+                <!-- Tabs -->
+                <div class="methodology-tabs">
+                    <button class="method-tab active" onclick="showMethod(0, this)">
+                        <span class="pt">Análise de Clusters 3D</span>
+                        <span class="en">3D Cluster Analysis</span>
+                    </button>
+                    <button class="method-tab" onclick="showMethod(1, this)">
+                        <span class="pt">Precificação Dinâmica</span>
+                        <span class="en">Dynamic Pricing</span>
+                    </button>
+                    <button class="method-tab" onclick="showMethod(2, this)">
+                        <span class="pt">Report One Page</span>
+                        <span class="en">One Page Report</span>
+                    </button>
+                </div>
+
+                <!-- Slide 1: Cluster 3D -->
+                <div class="method-slide active" id="method-0">
+                    <span class="method-label">
+                        <span class="pt">Segmentação comportamental via K-Means · Dados simulados</span>
+                        <span class="en">Behavioral segmentation via K-Means · Simulated data</span>
+                    </span>
+                    <div class="chart-container">
+                        <div id="cluster3DChart"></div>
+                    </div>
+                </div>
+
+                <!-- Slide 2: Dynamic Pricing Regression -->
+                <div class="method-slide" id="method-1">
+                    <span class="method-label">
+                        <span class="pt">Regressão multivariada · Preço dinâmico por perfil de comprador · Dados simulados</span>
+                        <span class="en">Multivariate regression · Dynamic pricing by buyer profile · Simulated data</span>
+                    </span>
+                    <div class="chart-container">
+                        <div id="regressionChart"></div>
+                    </div>
+                </div>
+
+                <!-- Slide 3: Report One Page -->
+                <div class="method-slide" id="method-2">
+                    <span class="method-label">
+                        <span class="pt">Report One Page · Social Listening + Análise de Preço × Perfil · Dados simulados</span>
+                        <span class="en">One Page Report · Social Listening + Price × Profile Analysis · Simulated data</span>
+                    </span>
+                    <div class="report-onepage">
+                        <!-- Header -->
+                        <div class="report-header">
+                            <h3>
+                                <span class="pt">Performais Daily 02.06 | Marca X — Sentimento & Precificação: perfis de alto ticket dominam conversão premium</span>
+                                <span class="en">Performais Daily 02.06 | Brand X — Sentiment & Pricing: high-ticket profiles dominate premium conversion</span>
+                            </h3>
+                            <p>
+                                <span class="pt">Posts monitorados: 4,2 mil &nbsp;|&nbsp; Alcance Potencial: 38 M &nbsp;|&nbsp; Engajamento: 142 mil</span>
+                                <span class="en">Monitored posts: 4.2K &nbsp;|&nbsp; Potential Reach: 38M &nbsp;|&nbsp; Engagement: 142K</span>
+                            </p>
+                        </div>
+
+                        <!-- KPIs -->
+                        <div class="report-kpis">
+                            <div class="report-kpi">
+                                <span class="kpi-val">4,2K</span>
+                                <span class="kpi-lbl">
+                                    <span class="pt">Menções</span><span class="en">Mentions</span>
+                                </span>
+                            </div>
+                            <div class="report-kpi">
+                                <span class="kpi-val">142K</span>
+                                <span class="kpi-lbl">
+                                    <span class="pt">Engajamento</span><span class="en">Engagement</span>
+                                </span>
+                            </div>
+                            <div class="report-kpi">
+                                <span class="kpi-val">58%</span>
+                                <span class="kpi-lbl">
+                                    <span class="pt">Sentimento +</span><span class="en">Positive Sent.</span>
+                                </span>
+                            </div>
+                            <div class="report-kpi">
+                                <span class="kpi-val">R$487</span>
+                                <span class="kpi-lbl">
+                                    <span class="pt">Preço ótimo (ticket alto)</span><span class="en">Optimal price (high ticket)</span>
+                                </span>
+                            </div>
+                            <div class="report-kpi">
+                                <span class="kpi-val">R$219</span>
+                                <span class="kpi-lbl">
+                                    <span class="pt">Preço ótimo (ticket baixo)</span><span class="en">Optimal price (low ticket)</span>
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Body: 2 columns -->
+                        <div class="report-body">
+                            <!-- Left: Narratives + Sentiment chart -->
+                            <div class="report-block">
+                                <h4>
+                                    <span class="pt">Narrativas do Dia</span>
+                                    <span class="en">Key Narratives</span>
+                                </h4>
+                                <ul class="report-narrative">
+                                    <li>
+                                        <strong><span class="pt">Fidelizados com ticket alto lideram conversão.</span><span class="en">High-ticket loyal buyers lead conversion.</span></strong>
+                                        <span class="pt"> Segmento responde por 41% da receita com apenas 18% do volume de transações.</span>
+                                        <span class="en"> Segment accounts for 41% of revenue with only 18% of transaction volume.</span>
+                                    </li>
+                                    <li>
+                                        <strong><span class="pt">Sentimento positivo impulsionado por campanha de lançamento.</span><span class="en">Positive sentiment driven by launch campaign.</span></strong>
+                                        <span class="pt"> 9.200 manifestações orgânicas nas primeiras 48h — maior pico da série.</span>
+                                        <span class="en"> 9,200 organic posts in the first 48h — highest peak in the series.</span>
+                                    </li>
+                                    <li>
+                                        <strong><span class="pt">Não fidelizados com ticket baixo apresentam elasticidade alta.</span><span class="en">Non-loyal low-ticket buyers show high elasticity.</span></strong>
+                                        <span class="pt"> Redução de 12% no preço gera aumento de 34% no volume deste segmento.</span>
+                                        <span class="en"> A 12% price drop generates a 34% volume increase in this segment.</span>
+                                    </li>
+                                    <li>
+                                        <strong><span class="pt">Vetor de ruído: comparativo com concorrente B.</span><span class="en">Noise vector: comparison with competitor B.</span></strong>
+                                        <span class="pt"> 486 menções questionando diferencial de preço — baixo engajamento, mas presente.</span>
+                                        <span class="en"> 486 mentions questioning price differential — low engagement, but present.</span>
+                                    </li>
+                                </ul>
+                                <br>
+                                <h4 style="margin-top:8px">
+                                    <span class="pt">Tendência de Sentimento (últimos 14 dias)</span>
+                                    <span class="en">Sentiment Trend (last 14 days)</span>
+                                </h4>
+                                <div id="sentimentChart"></div>
+                            </div>
+
+                            <!-- Right: Top posts table -->
+                            <div class="report-block">
+                                <h4>
+                                    <span class="pt">Top Posts em Engajamento</span>
+                                    <span class="en">Top Posts by Engagement</span>
+                                </h4>
+                                <table class="report-table">
+                                    <thead>
+                                        <tr>
+                                            <th><span class="pt">Perfil</span><span class="en">Profile</span></th>
+                                            <th><span class="pt">Manifest.</span><span class="en">Engag.</span></th>
+                                            <th><span class="pt">Tema</span><span class="en">Topic</span></th>
+                                            <th>Sent.</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td>@marcaX_oficial</td><td class="num">9.504</td><td><span class="pt">Post próprio — lançamento produto</span><span class="en">Own post — product launch</span></td><td><span class="tag-pos">POS</span></td></tr>
+                                        <tr><td>@techreviews_br</td><td class="num">5.528</td><td><span class="pt">Review comparativo — ticket alto</span><span class="en">Comparative review — high ticket</span></td><td><span class="tag-pos">POS</span></td></tr>
+                                        <tr><td>@consumidorativo</td><td class="num">4.315</td><td><span class="pt">Preço justo para fidelizados</span><span class="en">Fair price for loyal buyers</span></td><td><span class="tag-pos">POS</span></td></tr>
+                                        <tr><td>@economizabr</td><td class="num">3.788</td><td><span class="pt">Comparação com concorrente B</span><span class="en">Comparison with competitor B</span></td><td><span class="tag-neg">NEG</span></td></tr>
+                                        <tr><td>@influencermoda</td><td class="num">3.427</td><td><span class="pt">Unboxing — fidelizado vol. alto</span><span class="en">Unboxing — high-volume loyal</span></td><td><span class="tag-pos">POS</span></td></tr>
+                                        <tr><td>@jornalcomercio</td><td class="num">2.443</td><td><span class="pt">Estratégia de preço dinâmico</span><span class="en">Dynamic pricing strategy</span></td><td><span class="tag-neu">NEU</span></td></tr>
+                                        <tr><td>@varejo360</td><td class="num">2.043</td><td><span class="pt">Ticket baixo: oportunidade perdida?</span><span class="en">Low ticket: missed opportunity?</span></td><td><span class="tag-neg">NEG</span></td></tr>
+                                        <tr><td>@marketingdigital</td><td class="num">1.562</td><td><span class="pt">Segmentação por perfil funciona</span><span class="en">Profile segmentation works</span></td><td><span class="tag-pos">POS</span></td></tr>
+                                        <tr><td>@clientevip</td><td class="num">742</td><td><span class="pt">Fidelidade recompensada no preço</span><span class="en">Loyalty rewarded in pricing</span></td><td><span class="tag-pos">POS</span></td></tr>
+                                        <tr><td>@critica_consumo</td><td class="num">336</td><td><span class="pt">Não fidelizados pagam mais caro?</span><span class="en">Non-loyal paying more?</span></td><td><span class="tag-neg">NEG</span></td></tr>
+                                    </tbody>
+                                </table>
+
+                                <br>
+                                <h4 style="margin-top:8px">
+                                    <span class="pt">Oportunidades Estratégicas</span>
+                                    <span class="en">Strategic Opportunities</span>
+                                </h4>
+                                <ul class="report-narrative">
+                                    <li>
+                                        <strong><span class="pt">1. Ativar fidelizados de alto volume com oferta exclusiva.</span><span class="en">1. Activate high-volume loyal buyers with exclusive offer.</span></strong>
+                                        <span class="pt"> Segmento com maior LTV — campanha de retenção com preço personalizado aumenta recorrência em até 22%.</span>
+                                        <span class="en"> Highest LTV segment — retention campaign with personalized pricing increases recurrence by up to 22%.</span>
+                                    </li>
+                                    <li>
+                                        <strong><span class="pt">2. Neutralizar ruído sobre preço com conteúdo de valor.</span><span class="en">2. Neutralize price noise with value content.</span></strong>
+                                        <span class="pt"> Publicar comparativo de custo-benefício por perfil para reposicionar percepção de preço justo.</span>
+                                        <span class="en"> Publish cost-benefit comparison by profile to reposition fair price perception.</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -1464,6 +1822,134 @@
 
             const config = { responsive: true, displayModeBar: false };
             Plotly.newPlot('cluster3DChart', traces, layout, config);
+        }
+
+        // Methodology tab switcher
+        function showMethod(index, btn) {
+            document.querySelectorAll('.method-slide').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.method-tab').forEach(t => t.classList.remove('active'));
+            document.getElementById('method-' + index).classList.add('active');
+            btn.classList.add('active');
+            if (index === 1) initRegressionChart();
+            if (index === 2) initSentimentChart();
+        }
+
+        // Regression Chart: Dynamic Pricing by Buyer Profile
+        let regressionRendered = false;
+        function initRegressionChart() {
+            if (regressionRendered) return;
+            regressionRendered = true;
+
+            const lang = document.documentElement.classList.contains('lang-en') ? 'en' : 'pt';
+
+            const profiles = lang === 'pt'
+                ? ['FIDELIZADOS\nVOL. MODERADO', 'NÃO FIDELIZADOS\nTICKET BAIXO', 'FIDELIZADOS\nALTO VOLUME', 'FIDELIZADOS\nTICKET ALTO', 'NÃO FIDELIZADOS\nTICKET ALTO']
+                : ['LOYAL\nMOD. VOLUME', 'NON-LOYAL\nLOW TICKET', 'LOYAL\nHIGH VOLUME', 'LOYAL\nHIGH TICKET', 'NON-LOYAL\nHIGH TICKET'];
+
+            // Simulated regression: price points per profile
+            const pricePoints = [120, 180, 240, 300, 360, 420, 480, 540];
+
+            // Conversion rate curves per profile (simulated multivariate regression output)
+            const conversionData = [
+                [0.72, 0.68, 0.61, 0.52, 0.41, 0.30, 0.20, 0.12],  // Fidelizados vol moderado
+                [0.85, 0.70, 0.50, 0.32, 0.18, 0.09, 0.04, 0.02],  // Não fidelizados ticket baixo
+                [0.78, 0.75, 0.70, 0.63, 0.54, 0.43, 0.31, 0.20],  // Fidelizados alto volume
+                [0.60, 0.62, 0.65, 0.67, 0.66, 0.62, 0.55, 0.44],  // Fidelizados ticket alto
+                [0.55, 0.58, 0.60, 0.58, 0.52, 0.43, 0.32, 0.20],  // Não fidelizados ticket alto
+            ];
+
+            const colors = ['#00ff88', '#00bfff', '#ffd700', '#ff8c00', '#ff4500'];
+
+            const optimalPrices = [219, 148, 267, 380, 320];
+            const optimalConv   = [0.61, 0.85, 0.70, 0.67, 0.60];
+
+            const traces = profiles.map((name, i) => ({
+                x: pricePoints,
+                y: conversionData[i],
+                mode: 'lines+markers',
+                type: 'scatter',
+                name: name,
+                line: { color: colors[i], width: 2.5, shape: 'spline' },
+                marker: { size: 5, color: colors[i] },
+                hovertemplate: `<b>${name.replace('\\n', ' ')}</b><br>Preço: R$%{x}<br>Conversão: %{y:.0%}<extra></extra>`
+            }));
+
+            // Add optimal price markers
+            const optMarkers = {
+                x: optimalPrices,
+                y: optimalConv,
+                mode: 'markers',
+                type: 'scatter',
+                name: lang === 'pt' ? 'Preço Ótimo (Regressão)' : 'Optimal Price (Regression)',
+                marker: { size: 12, color: '#ffffff', symbol: 'star', line: { color: '#00ff88', width: 2 } },
+                hovertemplate: lang === 'pt'
+                    ? '<b>Preço Ótimo</b><br>R$%{x}<br>Conv: %{y:.0%}<extra></extra>'
+                    : '<b>Optimal Price</b><br>R$%{x}<br>Conv: %{y:.0%}<extra></extra>'
+            };
+
+            traces.push(optMarkers);
+
+            const layout = {
+                paper_bgcolor: 'rgba(0,0,0,0)',
+                plot_bgcolor: '#0a0a0a',
+                margin: { l: 55, r: 20, b: 60, t: 20 },
+                showlegend: true,
+                legend: { x: 0.01, y: 0.01, font: { size: 9, color: '#888', family: 'Inter' }, bgcolor: 'rgba(10,10,10,0.7)', orientation: 'v' },
+                xaxis: {
+                    title: { text: lang === 'pt' ? 'Preço (R$)' : 'Price (R$)', font: { color: '#666', size: 11 } },
+                    gridcolor: '#1a1a1a', tickfont: { color: '#555', size: 10 },
+                    tickprefix: 'R$', zeroline: false
+                },
+                yaxis: {
+                    title: { text: lang === 'pt' ? 'Taxa de Conversão' : 'Conversion Rate', font: { color: '#666', size: 11 } },
+                    gridcolor: '#1a1a1a', tickfont: { color: '#555', size: 10 },
+                    tickformat: '.0%', zeroline: false, range: [0, 1]
+                },
+                annotations: [{
+                    x: 0.5, y: 1.04, xref: 'paper', yref: 'paper',
+                    text: lang === 'pt'
+                        ? '★ = Preço ótimo estimado por regressão multivariada para cada perfil'
+                        : '★ = Optimal price estimated by multivariate regression per profile',
+                    showarrow: false,
+                    font: { size: 9.5, color: '#555', family: 'Inter' },
+                    align: 'center'
+                }]
+            };
+
+            Plotly.newPlot('regressionChart', traces, layout, { responsive: true, displayModeBar: false });
+        }
+
+        // Sentiment Chart for Report One Page
+        let sentimentRendered = false;
+        function initSentimentChart() {
+            if (sentimentRendered) return;
+            sentimentRendered = true;
+
+            const lang = document.documentElement.classList.contains('lang-en') ? 'en' : 'pt';
+
+            const days = ['20/05','21/05','22/05','23/05','24/05','25/05','26/05','27/05','28/05','29/05','30/05','31/05','01/06','02/06'];
+            const pos  = [52, 55, 49, 58, 61, 57, 53, 60, 64, 59, 55, 62, 67, 58];
+            const neu  = [28, 26, 30, 24, 22, 25, 28, 22, 19, 23, 27, 21, 18, 24];
+            const neg  = [20, 19, 21, 18, 17, 18, 19, 18, 17, 18, 18, 17, 15, 18];
+
+            const traces = [
+                { x: days, y: pos, name: lang === 'pt' ? 'Positivo' : 'Positive', type: 'bar', marker: { color: '#00ff88' } },
+                { x: days, y: neu, name: lang === 'pt' ? 'Neutro' : 'Neutral',   type: 'bar', marker: { color: '#444' } },
+                { x: days, y: neg, name: lang === 'pt' ? 'Negativo' : 'Negative', type: 'bar', marker: { color: '#ff4500' } },
+            ];
+
+            const layout = {
+                barmode: 'stack',
+                paper_bgcolor: 'rgba(0,0,0,0)',
+                plot_bgcolor: 'rgba(0,0,0,0)',
+                margin: { l: 35, r: 10, b: 35, t: 8 },
+                showlegend: true,
+                legend: { orientation: 'h', x: 0, y: 1.15, font: { size: 9, color: '#888', family: 'Inter' } },
+                xaxis: { tickfont: { color: '#555', size: 8 }, gridcolor: '#1a1a1a' },
+                yaxis: { tickfont: { color: '#555', size: 8 }, gridcolor: '#1a1a1a', ticksuffix: '%' },
+            };
+
+            Plotly.newPlot('sentimentChart', traces, layout, { responsive: true, displayModeBar: false });
         }
 
         // Initialize on page load
